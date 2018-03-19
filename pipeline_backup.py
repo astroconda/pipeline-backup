@@ -32,10 +32,10 @@ class PipelineSpec:
 
     def verify(self):
         with open(self.filename, 'r') as fp:
-            if '@EXPLICIT' not in fp.readlines():
-                return False
-
-        return True
+            for line in fp:
+                if line.startswith('@EXPLICIT'):
+                    return True
+        return False
 
     def _read(self):
         if not self.verify():
