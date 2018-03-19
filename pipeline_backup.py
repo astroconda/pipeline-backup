@@ -22,8 +22,11 @@ class PipelineSpec:
 
     def replace(self, old, new):
         for idx, record in enumerate(self.data):
-            if old in record:
-                self.data[idx] = record.replace(old, new)
+            parts = record.split('/')
+            for part in parts:
+                if part == old:
+                    self.data[idx] = record.replace(old, new)
+                    break
 
     def search(self, pattern):
         for record in self.data:
